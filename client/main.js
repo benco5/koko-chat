@@ -1,4 +1,5 @@
 // client/main.js
+
 Meteor.subscribe("messages");
 // Help the template; not necessarily user event / input
 Template.body.helpers({
@@ -27,17 +28,3 @@ Template.body.events({
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
 });
-
-
-
-
-
-	// var messages = document.getElementsByClassName("message");
-	// var len = messages.length;
-	// for (var i=0; i &lt; len; i++) {
-	// 	var message = messages[i];
-	// 	var rect = message.getBoundingClientRect();
-	// 	if (rect.top &lt; 60) {
-	// 		message.className += " hidden-message";
-	// 	};
-	// };
