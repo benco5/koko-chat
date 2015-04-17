@@ -1,0 +1,45 @@
+<!-- client/main.html -->
+<head>
+  <title>kokos-chat</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- <div class="navbar-inner"> -->
+			<div class="container">
+				<a class="navbar-brand" href="#">Koko's Chat</a>
+					<div class="nav navbar-nav navbar-right form-signin">
+						{{> loginButtons}}
+					</div>
+			</div>
+
+	</nav>
+
+	{{#if currentUser}}
+		<div class="container messages">
+			<ul class="message-list">
+				{{#each messages}}
+					{{>message}}
+				{{/each}}
+			</ul>
+		</div>
+
+		{{ else }}
+		<div class="container welcome">
+			<h1 class="main-title-heading">Welcome to Koko's Chat</h1>
+		  	<h3 class="form-signin-heading">Please login to continue</h3>
+		</div>
+	{{/if}}
+
+	<footer class="footer">
+		<div class="container">
+			{{#if currentUser}}
+				<form class="new-message">
+					<input type="text" name="text" placeholder="kokoMessage" />
+				</form>
+			{{/if}}
+		</div>
+	</footer>
+
+</body>
+

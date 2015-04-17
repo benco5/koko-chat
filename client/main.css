@@ -1,0 +1,96 @@
+/*client/main.css*/
+/*html {
+  position: relative;
+  min-height: 100%;
+}*/
+
+body {
+  font-family: sans-serif;
+  /*background-color: #315481;*/
+  /*background-image: linear-gradient(to top, #315481, #918e82 100%);*/
+  /*background-attachment: fixed;*/
+
+  position: fixed;
+  padding-bottom: 60px;
+  top: 0;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  height: 100%;
+  /*padding: 60px 0;*/
+  /*margin-bottom: 100px;*/
+  font-size: 14px;
+}
+
+/*nav {
+  right: 0;
+  z-index: 1;
+}*/
+
+.main-title-heading, .form-signin-heading {
+  text-align: center;
+}
+
+.form-signin  {
+  /*padding: 10px;*/
+  /*text-align: center;*/
+/*  margin-left: auto;
+  margin-right: auto;*/
+/*  max-width: 330px*/
+}
+
+/*form.new-message {
+  position: absolute;
+  bottom: 10px;
+  z-index: 1;
+}*/
+.container {
+  text-align: center;
+  max-width: 600px;
+}
+
+.welcome {
+  padding-top: 60px;
+}
+.messages {
+  position: relative;
+  padding-top: 60px;
+  /*padding-bottom: 60px;*/
+  height: 100%;
+}
+
+/*ul.message-list {
+  position: relative;
+}*/
+ul.message-list {
+  position: relative;
+  padding: 0;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+ul.message-list:last-child {
+  position: absolute;
+  bottom: 0px;
+}
+
+li.message {
+  list-style-type: none;
+  text-align: left;
+}
+
+.panel-heading, .panel-body {
+  padding: 5px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background-color: #f5f5f5;
+}
+
+
