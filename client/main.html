@@ -8,23 +8,24 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<a class="navbar-brand" href="#">Koko Chat</a>
-					<div class="nav navbar-nav navbar-right form-signin">
+					<ul class="nav navbar-nav navbar-right">
 						{{> loginButtons}}
-					</div>
+					</ul>
 			</div>
 
 	</nav>
 
 	{{#if currentUser}}
 		<div class="container messages">
+			<div class="buffer">
 			<ul class="message-list">
 				{{#each messages}}
 					{{>message}}
 				{{/each}}
 			</ul>
+			</div>
 		</div>
-
-		{{ else }}
+	{{ else }}
 		<div class="container welcome">
 			<h1 class="main-title-heading">Welcome to Koko Chat</h1>
 		  	<h5 class="form-signin-heading">Please login to continue</h5>

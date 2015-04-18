@@ -6,7 +6,7 @@ body {
   /*background-image: linear-gradient(to top, #315481, #918e82 100%);*/
   /*background-attachment: fixed;*/
 
-  position: fixed;
+  position: absolute;
   padding-bottom: 60px;
   top: 0;
   bottom: 0px;
@@ -35,11 +35,15 @@ body {
 }
 
 ul.message-list {
-  position: relative;
+  position: absolute;
   padding: 0;
   margin: 0 0 10px 0;
   width: 100%;
+  /*height: 100%;*/
+  overflow-y: scroll;
+  bottom: 0;
 }
+
 ul.message-list:last-child {
   position: absolute;
   bottom: 0px;
