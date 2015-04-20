@@ -1,11 +1,12 @@
 // client/main.js
 
 Meteor.subscribe("messages");
-// Help the template; not necessarily user event / input
+
+// Help the template
 Template.body.helpers({
 	// Seems to be like RoR controller index action
 	messages: function () {
-		return Messages.find({});
+		return Messages.find();
 	}
 });
 
@@ -15,9 +16,7 @@ Template.body.events({
 	"submit .new-message": function (event) {
 		// Event target = form element; assign text's value
 		var text = event.target.text.value;
-
 		Meteor.call("addMessage", text);
-
 		event.target.text.value = "";
 
 		// Prevent default form submit ...?
@@ -25,6 +24,26 @@ Template.body.events({
 	}
 });
 
+Tracker.autorun(function (c) {
+	if (Meteor.userId()) {
+		var count = Messages.find().count();
+		if (c.firstRun) {
+			return
+		}
+		if (document.body && count) {
+			var messages = document.body.getElementsByClassName('message');
+			var len = messages.length;
+			var lastMessage = messages[len-1];
+			lastMessage.scrollIntoView();
+		}
+
+	};
+
+})
+
+Tracker.flush();
+
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
 });
+

@@ -1,3 +1,3 @@
 // collections/messages.js
 
-Messages = new Mongo.Collection("messages")
+Messages = new Mongo.Collection("messages");

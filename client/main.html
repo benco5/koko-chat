@@ -6,24 +6,17 @@
 
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-				<a class="navbar-brand" href="#">Koko Chat</a>
-					<ul class="nav navbar-nav navbar-right">
-						{{> loginButtons}}
-					</ul>
-			</div>
-
+		<div class="container">
+			<a class="navbar-brand" href="#">Koko Chat</a>
+				<ul class="nav navbar-nav navbar-right">
+					{{> loginButtons}}
+				</ul>
+		</div>
 	</nav>
 
 	{{#if currentUser}}
 		<div class="container messages">
-			<div class="buffer">
-			<ul class="message-list">
-				{{#each messages}}
-					{{>message}}
-				{{/each}}
-			</ul>
-			</div>
+			{{> messageList messages=messages}}
 		</div>
 	{{ else }}
 		<div class="container welcome">
