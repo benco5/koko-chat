@@ -21,6 +21,13 @@ Template.body.events({
 
 		// Prevent default form submit ...?
 		return false;
+	},
+	"click #remote-signin-toggle": function (event) {
+		// Second button to toggle signin/up dropdown
+		if (!Meteor.userId()) {
+			$('#login-dropdown-list.dropdown').toggleClass('open');
+		}
+		return false;
 	}
 });
 
