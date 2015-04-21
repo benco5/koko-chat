@@ -5,35 +5,21 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">Koko Chat</a>
-				<ul class="nav navbar-nav navbar-right">
-					{{> loginButtons}}
-				</ul>
-		</div>
-	</nav>
+	{{> navigation }}
 
 	{{#if currentUser}}
 		<div class="container messages">
 			{{> messageList messages=messages}}
 		</div>
 	{{ else }}
-		<div class="container welcome">
+		<!-- <div class="container welcome"> -->
+		<div class="page-header container welcome">
 			<h1 class="main-title-heading">Welcome to Koko Chat</h1>
-		  	<h5 class="form-signin-heading">Please login to continue</h5>
+		  	<h5 class="form-signin-heading">Please login to continue </h5>
 		</div>
 	{{/if}}
 
-	<footer class="footer">
-		<div class="container">
-			{{#if currentUser}}
-				<form class="new-message">
-					<input type="text" name="text" placeholder="kokoMessage" />
-				</form>
-			{{/if}}
-		</div>
-	</footer>
+	{{> fixedFooter}}
 
 </body>
 

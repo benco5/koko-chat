@@ -36,12 +36,15 @@ body {
 ul.message-list {
   position: relative;
   padding: 0;
-  margin: 0 0 100px 0;
+  margin: 0 0 150px 0;
   width: 100%;
 }
 
-li.message {
+li {
   list-style-type: none;
+}
+
+li.message {
   text-align: left;
 }
 
@@ -56,7 +59,7 @@ li.message {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 80px;
+  height: 140px;
   background-color: #f5f5f5;
 }
 

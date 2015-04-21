@@ -1,0 +1,11 @@
+<template name="fixedFooter">
+	<footer class="footer">
+		<div class="container">
+			{{#if currentUser}}
+				<form class="new-message">
+					<input type="text" name="text" placeholder="kokoMessage" />
+				</form>
+			{{/if}}
+		</div>
+	</footer>
+</template>
