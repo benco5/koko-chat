@@ -48,8 +48,8 @@ Tracker.autorun(function (c) {
 })
 Tracker.flush();
 
-
-
+// The following two autoruns watch for user login/logout and
+// make calls to modify active Chatters collection accordingly
 Tracker.autorun(function (c) {
 	if (Meteor.userId() && !Session.get("chatter")) {
 		Session.set("chatter", Meteor.user()._id);
@@ -70,7 +70,6 @@ Tracker.autorun(function (c) {
 	var chatterCount = Chatters.find().count();
 	console.log(chatterCount);
 })
-
 
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
