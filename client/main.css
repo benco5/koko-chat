@@ -33,6 +33,17 @@ body {
   height: 100%;
 }
 
+form {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+}
+
 ul.message-list {
   position: relative;
   padding: 0;

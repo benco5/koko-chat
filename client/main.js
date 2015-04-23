@@ -1,6 +1,7 @@
 // client/main.js
 
 Meteor.subscribe("messages");
+Meteor.subscribe("chatters");
 
 // Help the template
 Template.body.helpers({
@@ -43,12 +44,33 @@ Tracker.autorun(function (c) {
 			var lastMessage = messages[len-1];
 			lastMessage.scrollIntoView();
 		}
-
 	};
+})
+Tracker.flush();
 
+
+
+Tracker.autorun(function (c) {
+	if (Meteor.userId() && !Session.get("chatter")) {
+		Session.set("chatter", Meteor.user()._id);
+		Meteor.call("addChatter");
+		c.stop();
+	};
+	console.log(Chatters.find().count());
+})
+Tracker.flush();
+
+Tracker.autorun(function (c) {
+	
+	if (!Meteor.userId() && Session.get("chatter")) {
+		Meteor.call("removeChatter", Session.get("chatter"));
+		delete Session.keys["chatter"];
+		// c.stop();
+	};
+	var chatterCount = Chatters.find().count();
+	console.log(chatterCount);
 })
 
-Tracker.flush();
 
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
