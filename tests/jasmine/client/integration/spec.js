@@ -18,8 +18,6 @@ function signUp (user, callback) {
 
 describe('User signup', function() {
 
-    // Meteor.subscribe("users");
-
     var user = { username: 'larry', password: 'password' };
 
     beforeEach(function(done) {
