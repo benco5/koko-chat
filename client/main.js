@@ -52,11 +52,12 @@ Tracker.flush();
 // make calls to modify active Chatters collection accordingly
 Tracker.autorun(function (c) {
 	if (Meteor.userId() && !Session.get("chatter")) {
-		Session.set("chatter", Meteor.user()._id);
+		Session.set("chatter", Meteor.userId());
 		Meteor.call("addChatter");
 		c.stop();
 	};
-	console.log(Chatters.find().count());
+	// console.log(Chatters.find().fetch());
+	// console.log(Chatters.find().count());
 })
 Tracker.flush();
 
@@ -67,11 +68,12 @@ Tracker.autorun(function (c) {
 		delete Session.keys["chatter"];
 		// c.stop();
 	};
+	// console.log(Chatters.find().fetch());
 	var chatterCount = Chatters.find().count();
-	console.log(chatterCount);
+	// console.log(chatterCount);
 })
+Tracker.flush();
 
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
 });
-

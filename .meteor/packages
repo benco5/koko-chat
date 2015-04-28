@@ -8,3 +8,6 @@ meteor-platform
 ian:accounts-ui-bootstrap-3
 twbs:bootstrap
 accounts-password
+sanjo:jasmine
+velocity:html-reporter
+testing-package
