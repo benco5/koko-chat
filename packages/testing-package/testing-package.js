@@ -3,9 +3,21 @@
 if ((typeof process !== 'undefined') && process.env.IS_MIRROR) {
 
   Meteor.methods({
+    loadFixtures: function(user){
+      console.log('Loading fixtures');
+      Accounts.createUser({
+        username: user.username,
+        password: user.password
+      });
+      console.log('Finished loading fixtures');
+    },
     usersCount: function () {
      	var count = Meteor.users.find({}).count();
      	return count;
+    },
+    chattersCount: function () {
+    	var count = Chatters.find({}).count();
+    	return count;
     },
     clearDB: function(){
       console.log('Clear DB');

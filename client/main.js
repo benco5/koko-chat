@@ -53,11 +53,11 @@ Tracker.flush();
 Tracker.autorun(function (c) {
 	if (Meteor.userId() && !Session.get("chatter")) {
 		Session.set("chatter", Meteor.userId());
-		Meteor.call("addChatter");
+		Meteor.call("addChatter", function() {
+			console.log("addChatter called on client");
+		});
 		c.stop();
 	};
-	// console.log(Chatters.find().fetch());
-	// console.log(Chatters.find().count());
 })
 Tracker.flush();
 
@@ -66,11 +66,11 @@ Tracker.autorun(function (c) {
 	if (!Meteor.userId() && Session.get("chatter")) {
 		Meteor.call("removeChatter", Session.get("chatter"));
 		delete Session.keys["chatter"];
-		// c.stop();
+		c.stop();
 	};
-	// console.log(Chatters.find().fetch());
+	console.log(Chatters.find().fetch());
 	var chatterCount = Chatters.find().count();
-	// console.log(chatterCount);
+	console.log("Chatters count " + chatterCount.toString());
 })
 Tracker.flush();
 
