@@ -27,15 +27,19 @@ describe('User signup', function() {
 });
 
 describe('User logging in', function(done) {
+    console.log("starting LOGIN tests");
 
     Meteor.call("clearDB", done);
 
+
     it('should start from welcome page', function (done) {
-        if (Meteor.userId()) Meteor.logout();
-        Meteor.call("clearDB", function() {
-            expect($('h1.main-title-heading').text()).toEqual('Welcome to Koko Chat');
-            done();
-        });
+
+        if (Meteor.userId() !== 'null') {
+            Meteor.logout();
+        };
+
+        expect($('h1.main-title-heading').text()).toEqual('Welcome to Koko Chat');
+        done();
     });
 
     it('chatter count should be zero before login', function (done) {
@@ -49,9 +53,11 @@ describe('User logging in', function(done) {
 
     it('should login a user', function (done) {
         Meteor.call("loadFixtures", user, function() {
-            Meteor.loginWithPassword(user.username, user.password, function() {
-                expect(Meteor.user().username).toEqual(user.username);
-                done();
+            setTimeout(function() {
+                Meteor.loginWithPassword(user.username, user.password, function() {
+                    expect(Meteor.user().username).toEqual(user.username);
+                    done();
+                }, 3000);
             });
         });
     });
@@ -62,6 +68,32 @@ describe('User logging in', function(done) {
             expect(afterCount).toEqual(1);
             done();
         });
+    });
+});
+
+describe('Posting a message', function() {
+
+    var someText = "hello world!";
+
+    it('should not work without text', function(done) {
+        Meteor.call("addMessage", "", function() {
+            expect(Messages.find({}).count()).toEqual(0);
+            done();
+        });
+    });
+
+    it('with text should add a message to the db', function(done) {
+
+        Meteor.call("addMessage", someText, function() {
+            expect(Messages.find({}).count()).toEqual(1);
+            done();
+        });
+    });
+
+    it('should have the correct text', function(done) {
+
+        expect(Messages.findOne().text).toBe(someText);
+        done();
     });
 });
 
