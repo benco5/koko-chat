@@ -57,12 +57,14 @@ Tracker.flush();
 // make calls to modify active Chatters collection accordingly
 Tracker.autorun(function (c) {
 	if (Meteor.userId() && !Session.get("chatter")) {
-		Session.set("chatter", Meteor.userId());
+		Session.setPersistent("chatter", Meteor.userId());
 		Meteor.call("addChatter", function() {
-			console.log("addChatter called on client");
 		});
-		c.stop();
+		// c.stop();
 	};
+	console.log("addChatter called on client");
+	var chatterCount = Chatters.find().count();
+	console.log("Chatters count " + chatterCount.toString());
 })
 Tracker.flush();
 
@@ -70,8 +72,8 @@ Tracker.autorun(function (c) {
 	
 	if (!Meteor.userId() && Session.get("chatter")) {
 		Meteor.call("removeChatter", Session.get("chatter"));
-		delete Session.keys["chatter"];
-		c.stop();
+		Session.setPersistent("chatter", null);
+		// c.stop();
 	};
 	console.log(Chatters.find().fetch());
 	var chatterCount = Chatters.find().count();
@@ -79,6 +81,9 @@ Tracker.autorun(function (c) {
 })
 Tracker.flush();
 
-Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
+Meteor.startup(function () {
+	Accounts.ui.config({
+	    passwordSignupFields: "USERNAME_ONLY"
+	});
 });
+
