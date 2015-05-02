@@ -5,9 +5,14 @@ Meteor.subscribe("chatters");
 
 // Help the template
 Template.body.helpers({
-	// Seems to be like RoR controller index action
 	messages: function () {
 		return Messages.find();
+	},
+	chatters: function () {
+		return Chatters.find();
+	},
+	currentChattersCount: function () {
+		return Chatters.find().count();
 	}
 });
 

@@ -1,7 +1,9 @@
 <template name="messageList">
-	<ul class="message-list">
-		{{#each messages}}
-			{{> message}}
-		{{/each}}
-	</ul>
+	<div class="container messages">
+		<ul class="message-list">
+			{{#each messages}}
+				{{> message}}
+			{{/each}}
+		</ul>
+	</div>
 </template>
