@@ -1,18 +1,26 @@
 // client/main.js
+Meteor.startup(function () {
+	Accounts.ui.config({
+	    passwordSignupFields: "USERNAME_ONLY"
+	});
+});
 
-Meteor.subscribe("messages");
+// Chatters are just a subset of Meteor.users
+// filtered for { active: true } property
 Meteor.subscribe("chatters");
+Meteor.subscribe("messages");
 
-// Help the template
+
+// Help a template
 Template.body.helpers({
 	messages: function () {
 		return Messages.find();
 	},
 	chatters: function () {
-		return Chatters.find();
+		return Meteor.users.find();
 	},
 	currentChattersCount: function () {
-		return Chatters.find().count();
+		return Meteor.users.find({active: true}).count();
 	}
 });
 
@@ -54,36 +62,28 @@ Tracker.autorun(function (c) {
 Tracker.flush();
 
 // The following two autoruns watch for user login/logout and
-// make calls to modify active Chatters collection accordingly
+// make calls to modify active chatters accordingly
 Tracker.autorun(function (c) {
-	if (Meteor.userId() && !Session.get("chatter")) {
-		Session.setPersistent("chatter", Meteor.userId());
-		Meteor.call("addChatter", function() {
+	// If Meteor.user just logged in, set them as active
+	if (Meteor.userId() && !Session.get("activeChatterId")) {
+		Session.setPersistent("activeChatterId", Meteor.userId());
+		Meteor.call("activateChatter", function() {
 		});
-		// c.stop();
 	};
-	console.log("addChatter called on client");
-	var chatterCount = Chatters.find().count();
+	var chatterCount = Meteor.users.find({active: true}).count();
 	console.log("Chatters count " + chatterCount.toString());
 })
 Tracker.flush();
 
 Tracker.autorun(function (c) {
-	
-	if (!Meteor.userId() && Session.get("chatter")) {
-		Meteor.call("removeChatter", Session.get("chatter"));
-		Session.setPersistent("chatter", null);
-		// c.stop();
+	// If Meteor.user has just logged out, set them as inactive
+	if (!Meteor.userId() && Session.get("activeChatterId")) {
+		Meteor.call("deactivateChatter", Session.get("activeChatterId"));
+		Session.setPersistent("activeChatterId", null);
 	};
-	console.log(Chatters.find().fetch());
-	var chatterCount = Chatters.find().count();
+	var chatterCount = Meteor.users.find({active: true}).count();
 	console.log("Chatters count " + chatterCount.toString());
 })
 Tracker.flush();
 
-Meteor.startup(function () {
-	Accounts.ui.config({
-	    passwordSignupFields: "USERNAME_ONLY"
-	});
-});
 

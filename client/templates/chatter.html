@@ -1,3 +1,5 @@
 <template name="chatter">
-	<li class="chatter">{{username}}</li>
+	<li class="chatter {{#if active}}active{{/if}}">
+		{{username}}
+	</li>
 </template>
