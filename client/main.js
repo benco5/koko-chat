@@ -45,6 +45,15 @@ Template.body.events({
 	}
 });
 
+Template.chatter.helpers({
+	flashActive : function () {
+		var el = Template.instance().firstNode;
+		$(el).css({'background-color': "#ffffff"});
+		$(el).animate({'background-color': "#00933B"}, 1000);
+		$(el).animate({'background-color': "#ffffff"}, 1000);
+	}
+});
+
 Tracker.autorun(function (c) {
 	if (Meteor.userId()) {
 		var count = Messages.find().count();
@@ -67,8 +76,7 @@ Tracker.autorun(function (c) {
 	// If Meteor.user just logged in, set them as active
 	if (Meteor.userId() && !Session.get("activeChatterId")) {
 		Session.setPersistent("activeChatterId", Meteor.userId());
-		Meteor.call("activateChatter", function() {
-		});
+		Meteor.call("activateChatter");
 	};
 	var chatterCount = Meteor.users.find({active: true}).count();
 	console.log("Chatters count " + chatterCount.toString());
@@ -85,5 +93,3 @@ Tracker.autorun(function (c) {
 	console.log("Chatters count " + chatterCount.toString());
 })
 Tracker.flush();
-
-

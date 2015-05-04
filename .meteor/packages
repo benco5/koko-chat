@@ -12,3 +12,4 @@ sanjo:jasmine
 velocity:html-reporter
 testing-package
 u2622:persistent-session
+mrt:jquery-color-animation
