@@ -17,7 +17,7 @@ Template.body.helpers({
 		return Messages.find();
 	},
 	chatters: function () {
-		return Meteor.users.find();
+		return Meteor.users.find({}, {sort: {active: -1, username: 1}});
 	},
 	currentChattersCount: function () {
 		return Meteor.users.find({active: true}).count();
