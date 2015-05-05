@@ -10,8 +10,8 @@ Meteor.startup(function () {
 Meteor.subscribe("chatters");
 Meteor.subscribe("messages");
 
-// Scroll last message into view; used on:
-// messageList rendered and autorun on message count
+// Scroll last message into view; used on rendering
+// of messageList and Messages (count) autorun
 var scrollLastMessage = function () {
 	var count = Messages.find().count();
 	var messages = document.body.getElementsByClassName('message');
