@@ -16,7 +16,7 @@ if ((typeof process !== 'undefined') && process.env.IS_MIRROR) {
      	return count;
     },
     chattersCount: function () {
-    	var count = Chatters.find({}).count();
+    	var count = Meteor.users.find({active: true}).count();
     	return count;
     },
     clearDB: function(){

@@ -16,8 +16,10 @@ describe('User signup', function() {
         Meteor.call("clearDB", done);
 
         Meteor.call("usersCount", function(error, userCountBefore) {
+            console.log("userCountBefore " + userCountBefore.toString());
             signUp(user);
             Meteor.call("usersCount", function (error, userCountAfter) {
+                console.log("userCountAfter " + userCountAfter.toString());
                 expect(userCountAfter).toEqual(userCountBefore + 1);
                 done();
             });
@@ -53,11 +55,9 @@ describe('User logging in', function(done) {
 
     it('should login a user', function (done) {
         Meteor.call("loadFixtures", user, function() {
-            setTimeout(function() {
-                Meteor.loginWithPassword(user.username, user.password, function() {
-                    expect(Meteor.user().username).toEqual(user.username);
-                    done();
-                }, 3000);
+            Meteor.loginWithPassword(user.username, user.password, function() {
+                expect(Meteor.user().username).toEqual(user.username);
+                done();
             });
         });
     });
