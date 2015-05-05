@@ -14,11 +14,13 @@ Meteor.subscribe("messages");
 // of messageList and Messages (count) autorun
 var scrollLastMessage = function () {
 	var count = Messages.find().count();
-	var messages = document.body.getElementsByClassName('message');
-	var len = messages.length;
-	var lastMessage = messages[len-1];
-	lastMessage.scrollIntoView();
-}
+	if (count > 0) {
+		var messages = document.body.getElementsByClassName('message');
+		var len = messages.length;
+		var lastMessage = messages[len-1];
+		lastMessage.scrollIntoView();
+	};
+};
 
 Template.messageList.rendered = function() {
 	scrollLastMessage();
