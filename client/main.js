@@ -10,6 +10,19 @@ Meteor.startup(function () {
 Meteor.subscribe("chatters");
 Meteor.subscribe("messages");
 
+// Scroll last message into view; used on:
+// messageList rendered and autorun on message count
+var scrollLastMessage = function () {
+	var count = Messages.find().count();
+	var messages = document.body.getElementsByClassName('message');
+	var len = messages.length;
+	var lastMessage = messages[len-1];
+	lastMessage.scrollIntoView();
+}
+
+Template.messageList.rendered = function() {
+	scrollLastMessage();
+};
 
 // Help a template
 Template.body.helpers({
@@ -56,15 +69,13 @@ Template.chatter.helpers({
 
 Tracker.autorun(function (c) {
 	if (Meteor.userId()) {
-		var count = Messages.find().count();
+		// var count = Messages.find().count();
 		if (c.firstRun) {
 			return
 		}
-		if (document.body && count) {
-			var messages = document.body.getElementsByClassName('message');
-			var len = messages.length;
-			var lastMessage = messages[len-1];
-			lastMessage.scrollIntoView();
+		// if (document.body && count) {
+		if (document.body) {
+			scrollLastMessage();
 		}
 	};
 })
