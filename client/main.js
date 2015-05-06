@@ -69,16 +69,16 @@ Template.chatter.helpers({
 	}
 });
 
+// Scroll last message into view when new message added
 Tracker.autorun(function (c) {
 	if (Meteor.userId()) {
-		// var count = Messages.find().count();
 		if (c.firstRun) {
 			return
-		}
-		// if (document.body && count) {
+		};
+
 		if (document.body) {
 			scrollLastMessage();
-		}
+		};
 	};
 })
 Tracker.flush();
